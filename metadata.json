@@ -1,0 +1,12 @@
+{
+  "name": "talamoig-nx",
+  "version": "0.2.0",
+  "author": "talamoig",
+  "summary": "Puppet module for NX client",
+  "license": "Apache 2.0",
+  "source": "http://github.com/talamoig/puppet-nx",
+  "project_page": "https://github.com/talamoig/puppet-nx",
+  "issues_url": "https://github.com/talamoig/puppet-nx/issues",
+  "dependencies": []
+}
+
