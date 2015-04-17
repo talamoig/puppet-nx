@@ -39,13 +39,13 @@ class nx {
 
   file{
     "/tmp/nxclient-3.5.0-6.x86_64.rpm":
-      source => "puppet:///nx/nxclient-3.5.0-6.x86_64.rpm";
+      source => "puppet:///modules/nx/nxclient-3.5.0-6.x86_64.rpm";
     
     "/tmp/nxnode-3.5.0-3.x86_64.rpm":
-      source => "puppet:///nx/nxnode-3.5.0-3.x86_64.rpm";
+      source => "puppet:///modules/nx/nxnode-3.5.0-3.x86_64.rpm";
     
     "/tmp/nxserver-3.5.0-4.x86_64.rpm":
-      source => "puppet:///nx/nxserver-3.5.0-4.x86_64.rpm";
+      source => "puppet:///modules/nx/nxserver-3.5.0-4.x86_64.rpm";
   }
   
   Package{ensure => installed, provider => "rpm"}
@@ -72,7 +72,7 @@ class nx {
   }
   
   file {"/usr/NX/etc/server.cfg":
-    source => "puppet:///nx/server.cfg",
+    source => "puppet:///modules/nx/server.cfg",
     require => Service["nxserver"]
   }
   
