@@ -54,23 +54,26 @@ class nx {
   
   package{
     'nxclient':
-      source  => '/tmp/nxclient-3.5.0-6.x86_64.rpm',
-      require => File['/tmp/nxclient-3.5.0-6.x86_64.rpm'];
+      source   => '/tmp/nxclient-3.5.0-6.x86_64.rpm',
+      provider => 'rpm',
+      require  => File['/tmp/nxclient-3.5.0-6.x86_64.rpm'];
     
     'nxnode':
-      source  => '/tmp/nxnode-3.5.0-3.x86_64.rpm',
-      require => File['/tmp/nxnode-3.5.0-3.x86_64.rpm'];
+      source   => '/tmp/nxnode-3.5.0-3.x86_64.rpm',
+      provider => 'rpm',
+      require  => File['/tmp/nxnode-3.5.0-3.x86_64.rpm'];
     
     'nxserver':
-      source  => '/tmp/nxserver-3.5.0-4.x86_64.rpm',
-      require => File['/tmp/nxserver-3.5.0-4.x86_64.rpm']
+      source   => '/tmp/nxserver-3.5.0-4.x86_64.rpm',
+      provider => 'rpm',
+      require  => File['/tmp/nxserver-3.5.0-4.x86_64.rpm']
   }
 
   file {'/usr/NX/etc/server.cfg':
     source  => 'puppet:///modules/nx/server.cfg',
     require => Package['nxserver']
   }
-    
+  
   service{'nxserver':
     enable  => false,
     ensure  => running,
