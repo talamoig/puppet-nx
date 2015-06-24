@@ -68,7 +68,7 @@ class nx {
 
   file {'/usr/NX/etc/server.cfg':
     source  => 'puppet:///modules/nx/server.cfg',
-    require => Service['nxserver']
+    require => Package['nxserver']
   }
     
   service{'nxserver':
