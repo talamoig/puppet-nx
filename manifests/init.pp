@@ -72,7 +72,7 @@ class nx {
   }
     
   service{'nxserver':
-    enable  => true,
+    enable  => false,
     ensure  => running,
     start   => '/usr/NX/bin/nxserver --start',
     stop    => '/usr/NX/bin/nxserver --stop',
