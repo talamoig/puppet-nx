@@ -77,7 +77,7 @@ class nx {
     start   => '/usr/NX/bin/nxserver --start',
     stop    => '/usr/NX/bin/nxserver --stop',
     restart => '/usr/NX/bin/nxserver --restart',
-    require => Exec['nxserver-install']
+    require => File['/usr/NX/etc/server.cfg']
   }
   
 }
