@@ -73,11 +73,11 @@ class nx {
     source  => 'puppet:///modules/nx/server.cfg',
     require => Package['nxserver']
   }
-  file { '/usr/NX/etc/node.lic':
-    ensure  => link,
-    target  => '/usr/NX/etc/server.lic.sample',
-    require => Package['nxserver']
-  }
+#  file { '/usr/NX/etc/node.lic':
+#    ensure  => link,
+#    target  => '/usr/NX/etc/server.lic.sample',
+#    require => Package['nxserver']
+#  }
   service{'nxserver':
     enable  => false,
     ensure  => running,
