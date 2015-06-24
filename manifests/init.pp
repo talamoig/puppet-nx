@@ -35,45 +35,49 @@
 #
 # Copyright 2011 Your name here, unless otherwise noted.
 #
+
+# leggere
+# http://wiki.centos.org/HowTos/FreeNX
+
 class nx {
 
   file{
-    "/tmp/nxclient-3.5.0-6.x86_64.rpm":
-      source => "puppet:///modules/nx/nxclient-3.5.0-6.x86_64.rpm";
+    '/tmp/nxclient-3.5.0-6.x86_64.rpm':
+      source => 'puppet:///modules/nx/nxclient-3.5.0-6.x86_64.rpm';
     
-    "/tmp/nxnode-3.5.0-3.x86_64.rpm":
-      source => "puppet:///modules/nx/nxnode-3.5.0-3.x86_64.rpm";
+    '/tmp/nxnode-3.5.0-3.x86_64.rpm':
+      source => 'puppet:///modules/nx/nxnode-3.5.0-3.x86_64.rpm';
     
-    "/tmp/nxserver-3.5.0-4.x86_64.rpm":
-      source => "puppet:///modules/nx/nxserver-3.5.0-4.x86_64.rpm";
+    '/tmp/nxserver-3.5.0-4.x86_64.rpm':
+      source => 'puppet:///modules/nx/nxserver-3.5.0-4.x86_64.rpm';
   }
-  
-  Package{ensure => installed, provider => "rpm"}
   
   package{
-    "nxclient":
-      source => "/tmp/nxclient-3.5.0-6.x86_64.rpm",
-      require => File["/tmp/nxclient-3.5.0-6.x86_64.rpm"];
+    'nxclient':
+      source  => '/tmp/nxclient-3.5.0-6.x86_64.rpm',
+      require => File['/tmp/nxclient-3.5.0-6.x86_64.rpm'];
     
-    "nxnode":
-      source => "/tmp/nxnode-3.5.0-3.x86_64.rpm",
-      require => File["/tmp/nxnode-3.5.0-3.x86_64.rpm"];
+    'nxnode':
+      source  => '/tmp/nxnode-3.5.0-3.x86_64.rpm',
+      require => File['/tmp/nxnode-3.5.0-3.x86_64.rpm'];
     
-    "nxserver":
-      source => "/tmp/nxserver-3.5.0-4.x86_64.rpm",
-      require => File["/tmp/nxserver-3.5.0-4.x86_64.rpm"]
+    'nxserver':
+      source  => '/tmp/nxserver-3.5.0-4.x86_64.rpm',
+      require => File['/tmp/nxserver-3.5.0-4.x86_64.rpm']
   }
-  
-  service{"nxserver":
-    enable => true,
-    ensure => running,
-    status => "/bin/ls /var/lock/subsys/nxserver",
-    require => Package["nxserver"]
+
+  file {'/usr/NX/etc/server.cfg':
+    source  => 'puppet:///modules/nx/server.cfg',
+    require => Service['nxserver']
   }
-  
-  file {"/usr/NX/etc/server.cfg":
-    source => "puppet:///modules/nx/server.cfg",
-    require => Service["nxserver"]
+    
+  service{'nxserver':
+    enable  => true,
+    ensure  => running,
+    start   => '/usr/NX/bin/nxserver --start',
+    stop    => '/usr/NX/bin/nxserver --stop',
+    restart => '/usr/NX/bin/nxserver --restart',
+    require => Exec['nxserver-install']
   }
   
 }
