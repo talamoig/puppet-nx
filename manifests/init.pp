@@ -69,22 +69,13 @@ class nx {
       require  => File['/tmp/nxserver-3.5.0-4.x86_64.rpm']
   }
 
-  file {'/usr/NX/etc/server.cfg':
-    source  => 'puppet:///modules/nx/server.cfg',
-    require => Package['nxserver']
-  }
-#  file { '/usr/NX/etc/node.lic':
-#    ensure  => link,
-#    target  => '/usr/NX/etc/server.lic.sample',
-#    require => Package['nxserver']
-#  }
   service{'nxserver':
     enable  => false,
     ensure  => running,
     start   => '/usr/NX/bin/nxserver --start',
     stop    => '/usr/NX/bin/nxserver --stop',
     restart => '/usr/NX/bin/nxserver --restart',
-    require => File['/usr/NX/etc/server.cfg']
+#    require => File['/usr/NX/etc/server.cfg']
   }
   
 }
